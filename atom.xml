@@ -4,7 +4,7 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>Happy Hacking</title>
+ <title>feeling</title>
  <link href="http://jessinio.github.com/atom.xml" rel="self"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>http://jessinio.github.com</id>
