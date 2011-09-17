@@ -16,4 +16,4 @@ categories: life
 
 {% endhighlight %}
 
-!/images/shenjia_noodles_shanghai.jpg!
+!http://blog.jessinio.info/images/shenjia_noodles_shanghai.jpg!
