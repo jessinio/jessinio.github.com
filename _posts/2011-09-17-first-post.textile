@@ -1,9 +1,9 @@
 ---
 layout: post
-title: for test
+title: 上海沈家海鲜面
 categories: life
 ---
 
-for test
+测试发布博文
 
-!/images/feed-icon.png!
+!/images/shenjia_noodles_shanghai.jpg!
