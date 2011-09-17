@@ -1,1 +1,67 @@
-test
+---
+layout: master
+title: Happy Hacking
+description: jessinio blog
+---
+
+<div class='home_box' id='home_left'>
+  <h2><a href='http://feeds2.feedburner.com/jessinio' class='float-right'><img src='/images/feed-icon.png' alt='Subscribe'/></a> Latest Blog Posts <span class="more">(<a href='/blog.html'>More</a>)</span></h2>
+    
+{% for post in site.posts limit:5 %}
+  <div class='post'>
+    <h1><a href='{{post.url}}'>{{post.title}}</a>
+    <div class='date'> - {{post.date | date_to_string}}</div></h1>
+    <div class='body'>{{post.content}}</div>
+      <div class='sns'>
+    </div>
+    <br>
+    <a href='{{post.url}}#disqus_thread'>View Comments</a>
+  </div>
+{% endfor %}
+</table>
+
+<h2><span class="more"><a href='/blog.html'>More</a></span></h2>
+</div>
+<div class='home_box' id='home_right'>
+  <h2>Categories</h2>
+  <div id='github-projects'>
+    <div class="repo">
+      <h3><a href="/linux.html">linux ({{ site.categories.linux | size }})</a></h3>
+      <h3><a href="/android.html">android ({{ site.categories.android | size }})</a></h3>
+      <h3><a href="/life.html">life ({{ site.categories.life | size }})</a></h3>
+    </div>
+  </div>
+  <p>
+  <h2>Popular Posts</h2>
+  <div id='github-projects'>
+    <div class="repo">
+      <h3><a href="">hot post</a></h3>
+    </div>
+  </div>
+  <p>
+  <div>
+  <script type="text/javascript"><!--
+</script>
+</div>
+</div>
+
+<!--
+<script type="text/javascript" charset="utf-8">
+  $.githubUser('dyang', function(data) {
+    $('#github-projects').html('');
+    
+    var repos = data.user.repositories;
+    repos.sort(function(a,b) {
+      return b.watchers - a.watchers;
+    });
+    
+    $(repos.slice(0,6)).each(function() {
+      $('#github-projects').append("\
+<div class='repo'>\
+  <h3><a href='" + this.url + "'>" + this.name + "</a></h3>\
+  <span class='desc'>"+this.description+"</span>\
+</div>");
+    });
+  });
+</script>
+-->

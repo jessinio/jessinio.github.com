@@ -1,0 +1,9 @@
+---
+layout: post
+title: for test
+categories: life
+---
+
+for test
+
+!/images/feed-icon.png!
