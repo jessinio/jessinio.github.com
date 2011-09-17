@@ -6,4 +6,14 @@ categories: life
 
 测试发布博文
 
+再测试代码的highlight
+
+{% highlight python %}
+
+	def func(*arguments):
+		'test function'
+		print 'Hello World'
+
+{% endhighlight %}
+
 !/images/shenjia_noodles_shanghai.jpg!
