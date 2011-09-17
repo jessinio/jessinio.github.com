@@ -10,9 +10,9 @@ categories: life
 
 {% highlight python %}
 
-	def func(*arguments):
-		'test function'
-		print 'Hello World'
+def func(*arguments):
+	'test function'
+	print 'Hello World'
 
 {% endhighlight %}
 
