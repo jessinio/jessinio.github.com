@@ -1,0 +1,20 @@
+﻿---
+layout: post
+title: git笔记
+categories: work tools
+---
+
+h2. git与svn的区别：
+# 本地working tree是一个完整的仓库。
+# clone来的本地仓库与源仓库没有从属关系。
+ 
+h2. 使用git时容易受svn用法的影响的地方：
+# commit不是本地与源的数据交流方法，而是利用pull和push进行两个仓库之前的数据交流。
+# 使用分支是良好的习惯。
+# diff不仅仅是同一分支的版本比较，还可以比较不同分支的版本。
+# checkout是在本地仓库上进行分支切换
+ 
+
+h2. 本地仓库与git的分支管理
+
+h2. 使用diff
