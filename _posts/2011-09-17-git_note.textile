@@ -1,7 +1,7 @@
 ﻿---
 layout: post
 title: git笔记
-categories: work tools
+categories: work
 ---
 
 h2. git与svn的区别：
