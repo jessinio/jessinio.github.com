@@ -1,5 +1,5 @@
 ﻿---
-layout: post
+laout: post
 title: git笔记
 categories: tools
 ---
@@ -16,6 +16,8 @@ h2. 使用git时容易受svn用法的影响的地方：
  
 
 h2. 本地仓库与git的分支管理
+# 
 
 h2. 使用diff
+# 
 
