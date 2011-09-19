@@ -4,7 +4,7 @@ title: life
 full_posts: 5
 ---
 
-<a href='http://feeds2.feedburner.com/jessinio' class='float-right'><img src='/images/feed-icon.png' alt='Subscribe to XML Feed'/></a>
+<a href='http://feeds.feedburner.com/jessinio/sPJd' class='float-right'><img src='/images/feed-icon.png' alt='Subscribe to XML Feed'/></a>
 
 {% for post in site.categories.life %}
   {% if forloop.index < page.full_posts %}

@@ -10,10 +10,10 @@ categories: life
 
 {% highlight python %}
 
-	def func(*arguments):
-		'test function'
-		print 'Hello World'
+def func(*arguments):
+	'test function'
+	print 'Hello World'
 
 {% endhighlight %}
 
-!/images/shenjia_noodles_shanghai.jpg!
+!http://blog.jessinio.info/images/shenjia_noodles_shanghai.jpg!
