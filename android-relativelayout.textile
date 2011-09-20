@@ -1,0 +1,45 @@
+---
+layout: post
+title: relative layout
+categories: android
+---
+
+RelativeLayout不像LinearLayout那样通过自身的属性参数去影响子元素的布局，也就是说，RelativeLayout一般都是使用layout_height和layout_width属性就足够了。
+至于子元素的位置，是通过子元素自身的属性参数实现。
+
+例如下面的例子：
+
+{% highlight xml %}
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="200dp"
+	android:layout_width="200dp"
+	android:layout_gravity="center|center"
+	android:background="#AABBCC" >
+	
+ 	<TextView android:text="ONE"
+ 		android:id="@+id/textview_one"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:layout_margin="1dp"/>
+	                                               
+	<TextView android:text="TWO"
+		android:id="@+id/textview_two"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:layout_toRightOf="@+id/textview_one"
+		android:layout_margin="1dp"/>
+</RelativeLayout>
+
+{% endhighlight %}
+
+RelativteLayout对象只是把自己的大小和位置声明，对于子元素的位置不要求，全由子元素自己声明。
+
+!http://blog.jessinio.info/images/relativelayout-children-attribute.png!
