@@ -4,35 +4,35 @@ title: hierarchy viewer
 categories: android
 ---
 
-ÎŞ·¨Ê¹ÓÃhierarchy viewerÈ¥Á¬½Óproduction¼¶µÄÊÖ»ú
+æ— æ³•ä½¿ç”¨hierarchy viewerå»è¿æ¥productionçº§çš„æ‰‹æœº
 {% highlight %}
 To preserve security, Hierarchy Viewer can only connect to devices running a developer version of the Android system.
 {% endhighlight %}
 
-·ñÔò»á±¨£º
+å¦åˆ™ä¼šæŠ¥ï¼š
 {% highlight %}
 Unable to get view server version from device 304D1914FD433D6E
 Unable to get view server protocol version from device 304D1914FD433D6E
 Unable to debug device 304D1914FD433D6E
 {% endhighlight %}
-304D1914FD433D6EÊÇÒ»Ì¨productionÊÖ»ú
+304D1914FD433D6Eæ˜¯ä¸€å°productionæ‰‹æœº
 
-Òò´Ë£¬ÎªÁËÊÖÍ·ÉÏµÄÊÖ»ú·½±ã¿ª·¢²âÊÔ£¬»¹ÊÇĞèÒªË¢Ò»¸öµÚÈı·½ÓĞ´Ë¹¦ÄÜµÄROM¡£
-Èç¹ûROMÃ»ÓĞ´Ë¹¦ÄÜµ«ÓÖÏëÊ¹ÓÃhierarchy viewer¹¤¾ßµÄ»°£¬¿ÉÒÔÔÚ´úÂëÀï×öÒ»µãĞŞ¸Ä£¬ Ê¹ÓÃ´ËÀà£º
+å› æ­¤ï¼Œä¸ºäº†æ‰‹å¤´ä¸Šçš„æ‰‹æœºæ–¹ä¾¿å¼€å‘æµ‹è¯•ï¼Œè¿˜æ˜¯éœ€è¦åˆ·ä¸€ä¸ªç¬¬ä¸‰æ–¹æœ‰æ­¤åŠŸèƒ½çš„ROMã€‚
+å¦‚æœROMæ²¡æœ‰æ­¤åŠŸèƒ½ä½†åˆæƒ³ä½¿ç”¨hierarchy viewerå·¥å…·çš„è¯ï¼Œå¯ä»¥åœ¨ä»£ç é‡Œåšä¸€ç‚¹ä¿®æ”¹ï¼Œ ä½¿ç”¨æ­¤ç±»ï¼š
 https://github.com/romainguy/ViewServer/blob/master/src/com/android/debug/hv/ViewServerActivity.java
 
-h2. ÎªÊ²Ã´ÉùÃ÷µÄViewÃ»ÓĞÔÚÆÁÄ»ÉÏÏÔÊ¾£¿
+h2. ä¸ºä»€ä¹ˆå£°æ˜çš„Viewæ²¡æœ‰åœ¨å±å¹•ä¸Šæ˜¾ç¤ºï¼Ÿ
 
-Õâ¸öÎÊÌâ¶ÔÑ§Ï°UI¶øÒÑµÄĞÂÈËÀ´ËµºÜÊÇÓôÃÆ£¬Ò»°ãÓĞ¼¸ÖÖÇé¿ö£º
-# View±»»­ÔÚÆÁÄ»Ö®ÍâµÄÎ»ÖÃ
-# ¿Õ¼ä±»ÆäËüViewÕ¼ÓÃÍê
-# View±»ÆäËüView¸²¸Ç
-# ViewÊ¹ÓÃÁËinvisibleÊôĞÔ
+è¿™ä¸ªé—®é¢˜å¯¹å­¦ä¹ UIè€Œå·²çš„æ–°äººæ¥è¯´å¾ˆæ˜¯éƒé—·ï¼Œä¸€èˆ¬æœ‰å‡ ç§æƒ…å†µï¼š
+# Viewè¢«ç”»åœ¨å±å¹•ä¹‹å¤–çš„ä½ç½®
+# ç©ºé—´è¢«å…¶å®ƒViewå ç”¨å®Œ
+# Viewè¢«å…¶å®ƒViewè¦†ç›–
+# Viewä½¿ç”¨äº†invisibleå±æ€§
 
-¶ÔÓÚÇ°ÃæÁ½ÖÖÊ¹ÓÃhierarchy viewer¿ÉÒÔÕÒ³öÎÊÌâ¡£
+å¯¹äºå‰é¢ä¸¤ç§ä½¿ç”¨hierarchy viewerå¯ä»¥æ‰¾å‡ºé—®é¢˜ã€‚
 
-ÀıÈçÕâÒ»¸öxml²¼¾Ö£º!https://github.com/jessinio/android_example/blob/master/TestUIOverlay/res/layout/main.xml!
-´úÂëÔËĞĞºó£¬Ö»ÏÔÊ¾µÚÒ»¸öTextView¡£Èç¹ûÊ¹ÓÃhierarchy viewerÈ¥²é¿´Ã»ÓĞ±»ÏÔÊ¾µÄViewGroup¾Í»á·¢ÏÖmTotalLengthÊôĞÔÎª0£¬ TextView»áÏÔÊ¾mPrivateFlags_NOT_DRAW
+ä¾‹å¦‚è¿™ä¸€ä¸ªxmlå¸ƒå±€ï¼š!https://github.com/jessinio/android_example/blob/master/TestUIOverlay/res/layout/main.xml!
+ä»£ç è¿è¡Œåï¼Œåªæ˜¾ç¤ºç¬¬ä¸€ä¸ªTextViewã€‚å¦‚æœä½¿ç”¨hierarchy viewerå»æŸ¥çœ‹æ²¡æœ‰è¢«æ˜¾ç¤ºçš„ViewGroupå°±ä¼šå‘ç°mTotalLengthå±æ€§ä¸º0ï¼Œ TextViewä¼šæ˜¾ç¤ºmPrivateFlags_NOT_DRAW
 
 !http://blog.jessinio.info/images/layout-totallength-is-0.png!
 

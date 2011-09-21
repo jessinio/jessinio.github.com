@@ -1,1 +1,11 @@
----layout: posttitle: javaÄäÃûÀàcategories: java---{% highlight java %}{% endhighlight %}
+---
+layout: post
+title: javaåŒ¿åç±»
+categories: java
+---
+
+{% highlight java %}
+
+
+
+{% endhighlight %}

@@ -1,1 +1,70 @@
----layout: posttitle: linearlayoutcategories: android---linearlayoutÀàµÄlayout_gravityÊôĞÔ£º±¾ÔªËØÔÚ¸¸ÔªËØ·ÖÅäµÄ¿Õ¼äÄÚµÄÖØÁ¦·½Ïò!http://blog.jessinio.info/images/linearlayout-layout_gravity-top.png!!http://blog.jessinio.info/images/linearlayout-layout_gravity-center.png!linearlayoutÀàµÄgravityÊôĞÔ£º!http://blog.jessinio.info/images/linearlayout-gravity-top.png!!http://blog.jessinio.info/images/linearlayout-gravity-center.png!×ÓÔªËØ¿ÉÒÔ»ñµÃµÄÊôĞÔ£º layout_weight * ¶ÔorientationÊôĞÔ·½ÏòµÄÊ£Óà¿Õ¼äÊ¹ÓÃ±ÈÖØ ¾ÍÏÂÃæµÄxmlÃèÊö{% highlight xml %}<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"	android:layout_height="200dp"	android:layout_width="200dp"	android:background="#AABBCC"	android:orientation= "horizontal"	android:gravity="center"	android:layout_gravity= "center" >	 	<TextView android:text="ONE"		android:background="#aa0000"		android:layout_height="wrap_content"		android:layout_width="wrap_content"		android:layout_margin="1dp"/>	                                               	<TextView android:text="TWO"		android:background="#aa0000"		android:layout_height="wrap_content"		android:layout_width="wrap_content"		android:layout_margin="1dp"/></LinearLayout>{% endhighlight %}ÏÔÊ¾½á¹ûÈç£º!http://blog.jessinio.info/images/linearlayout-without-layout_weight.png!linearlayout»¹Ê£Óà²»ÉÙ¿Õ¼ä£¬ ÎªÁËÊ¹ÓÃÊ£ÓàµÄ¿Õ¼ä£¬ÔÚ×ÓÔªËØÉÏÊ¹ÓÃlayout_weightÊôĞÔ£º{% highlight xml %} 	<TextView android:text="ONE"		android:background="#aa0000"		android:layout_height="wrap_content"		android:layout_width="wrap_content"		android:layout_weight="1"		android:layout_margin="1dp"/>{% endhighlight %}½á¹ûÈçÏÂ£º!http://blog.jessinio.info/images/linearlayout-layout_weight.png!# Ö»ÒªÓĞ×ÓÔªËØÊ¹ÓÃÁËlayout_weightÊôĞÔºó£¬Ê£ÓàµÄ¿Õ¼ä±ØĞë100%±»·ÖÅä¡£# ×ÓÔªËØÊ¹ÓÃÁËlayout_weightÊôĞÔºó£¬´Ë×ÓÔªËØµÄlayout_width»òÕßlayout_height½«²»Æğ×÷ÓÃ£¨È¡¾öÓÚlinearlayoutµÄorientation·½Ïò£©# Èç¹û×ÓÔªËØÊ¹ÓÃÁËlayout_weightÊôĞÔ£¬´Ë×ÓÔªËØÔÚÏàÍ¬·½ÏòÉÏ¾ÍÊ¹ÓÃfill_parent£¬·ñÔò»á³öÏÖÆæ¹ÖÇé¿ö
+---
+layout: post
+title: linearlayout
+categories: android
+---
+
+linearlayoutç±»çš„layout_gravityå±æ€§ï¼šæœ¬å…ƒç´ åœ¨çˆ¶å…ƒç´ åˆ†é…çš„ç©ºé—´å†…çš„é‡åŠ›æ–¹å‘
+
+!http://blog.jessinio.info/images/linearlayout-layout_gravity-top.png!
+!http://blog.jessinio.info/images/linearlayout-layout_gravity-center.png!
+
+linearlayoutç±»çš„gravityå±æ€§ï¼š
+
+!http://blog.jessinio.info/images/linearlayout-gravity-top.png!
+!http://blog.jessinio.info/images/linearlayout-gravity-center.png!
+
+å­å…ƒç´ å¯ä»¥è·å¾—çš„å±æ€§ï¼š layout_weight
+ * å¯¹orientationå±æ€§æ–¹å‘çš„å‰©ä½™ç©ºé—´ä½¿ç”¨æ¯”é‡
+ 
+å°±ä¸‹é¢çš„xmlæè¿°
+{% highlight xml %}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="200dp"
+	android:layout_width="200dp"
+	android:background="#AABBCC"
+	android:orientation= "horizontal"
+	android:gravity="center"
+	android:layout_gravity= "center" >
+	
+ 	<TextView android:text="ONE"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_margin="1dp"/>
+	                                               
+	<TextView android:text="TWO"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_margin="1dp"/>
+</LinearLayout>
+
+{% endhighlight %}
+
+æ˜¾ç¤ºç»“æœå¦‚ï¼š
+
+!http://blog.jessinio.info/images/linearlayout-without-layout_weight.png!
+
+linearlayoutè¿˜å‰©ä½™ä¸å°‘ç©ºé—´ï¼Œ ä¸ºäº†ä½¿ç”¨å‰©ä½™çš„ç©ºé—´ï¼Œåœ¨å­å…ƒç´ ä¸Šä½¿ç”¨layout_weightå±æ€§ï¼š
+{% highlight xml %}
+
+ 	<TextView android:text="ONE"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_weight="1"
+		android:layout_margin="1dp"/>
+
+{% endhighlight %}
+
+ç»“æœå¦‚ä¸‹ï¼š
+!http://blog.jessinio.info/images/linearlayout-layout_weight.png!
+
+# åªè¦æœ‰å­å…ƒç´ ä½¿ç”¨äº†layout_weightå±æ€§åï¼Œå‰©ä½™çš„ç©ºé—´å¿…é¡»100%è¢«åˆ†é…ã€‚
+# å­å…ƒç´ ä½¿ç”¨äº†layout_weightå±æ€§åï¼Œæ­¤å­å…ƒç´ çš„layout_widthæˆ–è€…layout_heightå°†ä¸èµ·ä½œç”¨ï¼ˆå–å†³äºlinearlayoutçš„orientationæ–¹å‘ï¼‰
+# å¦‚æœå­å…ƒç´ ä½¿ç”¨äº†layout_weightå±æ€§ï¼Œæ­¤å­å…ƒç´ åœ¨ç›¸åŒæ–¹å‘ä¸Šå°±ä½¿ç”¨fill_parentï¼Œå¦åˆ™ä¼šå‡ºç°å¥‡æ€ªæƒ…å†µ
+
+
