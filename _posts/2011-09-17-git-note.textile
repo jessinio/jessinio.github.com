@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 ﻿---
 laout: post
-=======
----
-layout: post
->>>>>>> 36770d2eeb9430d903350876a034c4b156c02151
 title: git笔记
 categories: tools
 ---
