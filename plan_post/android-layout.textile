@@ -1,0 +1,40 @@
+---
+layout: post
+title: android的程序布局
+categories: android
+---
+
+2. View, ViewGroup元素自身的属性，和ViewGroup元素对其子元素的影响
+
+刚学android的布局时，总是感觉android的布局很乱，我个人感觉是：
+#. 没有文档对那堆xml属性进行分类
+##. 无法对各种View, ViewGroup的属性进行快速区分和查阅到文档.
+
+2. ViewGroup的gravity服从它子元素的layout_gravity
+
+{%  highlight xml %}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:background="#AABBCC"
+	android:orientation= "horizontal"
+	android:gravity="center"
+	android:layout_gravity= "center" >
+	
+ 	<TextView 
+ 		android:text="ONE"
+		android:background="#aa0000"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_gravity="bottom"
+		android:layout_margin="1dp"/>
+	                                               
+</LinearLayout>
+
+{% endhighlight %}
+
+运行结果：
+
+!http://blog.jessinio.info/images/parent-chrild-attribute-effect.png!

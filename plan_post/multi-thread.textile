@@ -1,0 +1,69 @@
+
+{% highlight %}
+
+android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
+
+{% endhighlight %}
+
+主要是在非主线程上修改了UI, 例如如下例子:
+
+{% highlight java %}
+
+package com.jessinio.TestMultiThread;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Button;
+
+public class TestMultiThreadActivity extends Activity {	
+	
+	Button sumbitButton;
+    /** Called when the activity is first created. */
+	Handler mHandler;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        this.sumbitButton = (Button)this.findViewById(R.id.sumbit_button);
+        
+        new Thread() {
+        	public void run(){
+        		Thread currentThread = Thread.currentThread();
+        		try {
+					currentThread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		TestMultiThreadActivity.this.sumbitButton.setText("YES");
+        	}
+        }.start();
+        
+    }
+}
+
+{% endhighlight %}
+
+因为在非主线程上调用了View的setText方法修改了UI.
+
+有多种方法完成这一需求:
+#. Activity.runOnUiThread( Runnable )
+#. View.post( Runnable )
+#. View.postDelayed( Runnable, long )
+#. Hanlder
+
+android framework还提供了一个抽象类: AsyncTask. 必须实现的方法:
+{% highlight %}
+
+protected Boolean doInBackground(<T>... params)
+
+{% endhighlight %}
+
+方法调用顺序:
+!http://blog.jessinio.info/images/AsyncTask_flow.jpg!
+
+
+
