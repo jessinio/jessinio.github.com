@@ -62,8 +62,10 @@ protected Boolean doInBackground(<T>... params)
 
 {% endhighlight %}
 
+AsyncTask的优势: 线程池管理
+
 方法调用顺序:
 !http://blog.jessinio.info/images/AsyncTask_flow.jpg!
 
-
+例子代码: https://github.com/jessinio/android_example/blob/master/TestMultiThread/src/com/jessinio/TestMultiThread/TestMultiThreadActivity.java
 
