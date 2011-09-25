@@ -1,0 +1,22 @@
+
+{% highlight xml %}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:paddingLeft="50dip"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:text="@string/hello"
+    android:layout_marginLeft="20dip"
+    />
+</LinearLayout>
+
+{% endhighlight %}
+
+padding是容器对子元素的参数, margin是容器里的View对父元素的参数. 从上面的例子可以看到, margin屈服于父元素的padding
