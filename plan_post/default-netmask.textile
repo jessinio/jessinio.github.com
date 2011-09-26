@@ -1,0 +1,25 @@
+{% highlight %}
+    root@CX160507:~# route -n
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+    10.150.161.0    0.0.0.0         255.255.255.0   U     0      0        0 eth1
+    0.0.0.0         10.150.161.254  0.0.0.0         UG    100    0        0 eth1
+{% endhighlight %}
+
+增加一个IP：
+
+{% highlight %}
+    ifconfig eth1:0 10.150.161.95
+{% highlight %}
+
+结果：
+{% highlight %}
+    root@CX160507:~# route -n
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+    10.150.161.0    0.0.0.0         255.255.255.0   U     0      0        0 eth1
+    10.0.0.0        0.0.0.0         255.0.0.0       U     0      0        0 eth1
+0.0.0.0         10.150.161.254  0.0.0.0         UG    100    0        0 eth1
+{% endhighlight %}
+
+netmask明显不是想要的。

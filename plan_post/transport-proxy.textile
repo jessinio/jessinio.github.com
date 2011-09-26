@@ -1,0 +1,40 @@
+linux kernel允许packet转发：
+{% highlight %}
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+{% endhighlight %}
+
+ubuntu下
+在/etc/ufw/ufw.conf文件里加入：
+{% highlight %}
+    DEFAULT_FORWARD_POLICY="ACCEPT"
+{% endhighlight %}    
+
+在/etc/ufw/before.rules里加入：
+
+{% highlight %}
+
+*nat
+:PREROUTING - [0:0]
+-A PREROUTING -d 10.150.161.95 -i eth1 -p tcp -j DNAT --to 10.176.24.1
+-A POSTROUTING -o eth1 -p tcp -j SNAT --to 10.150.161.95
+COMMIT
+
+{% endhighlight %}
+{% highlight %}
+
+结果：
+
+root@CX160507:~# iptables -t nat -L -n
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+DNAT       tcp  --  0.0.0.0/0            10.150.161.95       to:10.176.24.1 
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+SNAT       tcp  --  0.0.0.0/0            0.0.0.0/0           to:10.150.161.95 
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+{% endhighlight %}
