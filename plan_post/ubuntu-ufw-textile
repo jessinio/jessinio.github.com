@@ -1,0 +1,16 @@
+{% highlight %}
+
+everbox@CX160507:/etc/ufw$ sudo ufw app list 
+WARN: Skipping 'mysql': also in /etc/services
+Available applications:
+  Apache
+  Apache Full
+  Apache Secure
+  OpenSSH
+  Postfix
+  Postfix Submission
+  monit
+  nrpe
+  snmpd
+
+{% endhighlight %}
