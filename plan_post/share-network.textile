@@ -1,0 +1,21 @@
+---
+layout: post
+title: 使用iptables共享上网
+categories: linux
+---
+
+{% highlight %}
+
+*nat
+:PREROUTING - [0:0]
+:POSTROUTING - [0:0]
+:OUTPUT - [0:0]
+
+# test GateWay
+-A POSTROUTING -p tcp --src 192.168.1.100 -j SNAT --to-source 192.168.0.102
+
+COMMIT
+
+{% endhighlight %}
+
+当然, linux的forward需要打开
