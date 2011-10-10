@@ -13,6 +13,7 @@ categories: linux
 
 # test GateWay
 -A POSTROUTING -p tcp --src 192.168.1.100 -j SNAT --to-source 192.168.0.102
+-A POSTROUTING -p udp --src 192.168.1.100 -j SNAT --to-source 192.168.0.102
 
 COMMIT
 
