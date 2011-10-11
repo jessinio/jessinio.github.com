@@ -1,5 +1,5 @@
 
-{% highlight %}
+{% highlight txt %}
 
 android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
 
@@ -56,7 +56,7 @@ public class TestMultiThreadActivity extends Activity {
 #. Hanlder
 
 android framework还提供了一个抽象类: AsyncTask. 必须实现的方法:
-{% highlight %}
+{% highlight txt %}
 
 protected Boolean doInBackground(<T>... params)
 

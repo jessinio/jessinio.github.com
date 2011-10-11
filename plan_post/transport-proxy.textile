@@ -1,18 +1,18 @@
 linux kernel允许packet转发：
-{% highlight %}
+{% highlight shell %}
 echo 1 > /proc/sys/net/ipv4/ip_forward
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 {% endhighlight %}
 
 ubuntu下
 在/etc/ufw/ufw.conf文件里加入：
-{% highlight %}
+{% highlight config %}
     DEFAULT_FORWARD_POLICY="ACCEPT"
 {% endhighlight %}    
 
 在/etc/ufw/before.rules里加入：
 
-{% highlight %}
+{% highlight config %}
 
 *nat
 :PREROUTING - [0:0]
@@ -21,7 +21,7 @@ ubuntu下
 COMMIT
 
 {% endhighlight %}
-{% highlight %}
+{% highlight txt %}
 
 结果：
 

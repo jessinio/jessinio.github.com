@@ -4,7 +4,7 @@ title: NAT网关配置
 categories: linux
 ---
 
-{% highlight %}
+{% highlight config %}
 
 *nat
 :PREROUTING - [0:0]

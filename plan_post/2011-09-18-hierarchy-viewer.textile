@@ -5,12 +5,12 @@ categories: android
 ---
 
 无法使用hierarchy viewer去连接production级的手机
-{% highlight %}
+{% highlight txt %}
 To preserve security, Hierarchy Viewer can only connect to devices running a developer version of the Android system.
 {% endhighlight %}
 
 否则会报：
-{% highlight %}
+{% highlight txt %}
 Unable to get view server version from device 304D1914FD433D6E
 Unable to get view server protocol version from device 304D1914FD433D6E
 Unable to debug device 304D1914FD433D6E

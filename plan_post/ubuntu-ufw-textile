@@ -1,4 +1,4 @@
-{% highlight %}
+{% highlight txt %}
 
 everbox@CX160507:/etc/ufw$ sudo ufw app list 
 WARN: Skipping 'mysql': also in /etc/services

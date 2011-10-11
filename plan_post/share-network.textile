@@ -4,7 +4,7 @@ title: 使用iptables共享上网
 categories: linux
 ---
 
-{% highlight %}
+{% highlight config %}
 
 *nat
 :PREROUTING - [0:0]
