@@ -1,0 +1,41 @@
+---
+layout: post
+title: static route rule
+categories: linux
+---
+
+h2. centOS
+
+{% highlight %}
+
+/etc/sysconfig/network-scripts/ifup-routes
+
+{% endhighlight %}
+
+此脚本的内容：
+{% highlight bash %}
+
+FILES="/etc/sysconfig/network-scripts/route-$1"
+if [ -n "$2" -a "$2" != "$1" ]; then
+    FILES="$FILES /etc/sysconfig/network-scripts/route-$2"
+fi
+
+for file in $FILES; do
+   if [ -f "$file" ]; then
+       if egrep -q '^[[:space:]]*ADDRESS[0-9]+=' $file ; then
+           # new format
+           handle_file $file ${1%:*}
+       else
+           # older format
+           { cat "$file" ; echo ; } | while read line; do
+               if [[ ! "$line" =~ '^[[:space:]]*(\#.*)?$' ]]; then
+                   /sbin/ip route add $line
+               fi
+           done
+       fi
+   fi
+done
+
+{% endhighlight %}
+
+h2. ubuntu
