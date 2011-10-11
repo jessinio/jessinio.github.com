@@ -6,7 +6,7 @@ categories: linux
 
 h2. centOS
 
-{% highlight %}
+{% highlight shell %}
 
 /etc/sysconfig/network-scripts/ifup-routes
 
