@@ -8,3 +8,10 @@ categories: linux
 有时需要在windows下编辑文件，还是需要熟悉一下此环境。
 首先是回车问题：
 !http://blog.jessinio.info/images/notepad++_newline_format.jpg!
+最好是显示new line符：
+!http://blog.jessinio.info/images/notepad++_display_newline.jpg!
+
+还有万恶的BOM头！！
+!http://blog.jessinio.info/images/notepad++_without_bom.png!
+最讨厌的就是加入BOM了，常常会为这种屁字节调试N久。下面对比有BOM与没有BOM的文件：
+!http://blog.jessinio.info/images/notepad++_bom.png!
