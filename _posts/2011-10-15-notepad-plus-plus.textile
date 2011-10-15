@@ -1,0 +1,10 @@
+---
+layout: post
+title: windows文本编辑器
+categories: linux
+---
+
+为了使用公司的VPN和公司内部服务，只能使用windows。
+有时需要在windows下编辑文件，还是需要熟悉一下此环境。
+首先是回车问题：
+!http://blog.jessinio.info/images/notepad++_newline_format.jpg!
