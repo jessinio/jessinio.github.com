@@ -4,7 +4,7 @@ title: arp annoucement
 categories: linux
 ---
 
-又忘记了arp announcement就是ratuitous ARP了（旧blog: http://jessinio.blogspot.com/2010/12/ethernet.html）
+又忘记了arp announcement就是gratuitous ARP了（旧blog: http://jessinio.blogspot.com/2010/12/ethernet.html）
 
 回顾一下：arp announcement的作用：
 
