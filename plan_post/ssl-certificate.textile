@@ -1,0 +1,20 @@
+---
+layout: post
+title: certificate
+categories: linux
+---
+
+
+
+几个名词：
+#. CA
+#. CA file
+#. certificate
+#. Root certificate
+#. CRL
+#. self-signed certificate
+
+CA一指certificate authority
+CA一指已经签名的certificate, 比如open verify -CAfile 命令中的CAfile
+
+
