@@ -1,0 +1,14 @@
+[root@lvs1_s ~]# strace -p 18235
+Process 18235 attached - interrupt to quit
+read(8, ^C <unfinished ...>
+Process 18235 detached
+[root@lvs1_s ~]# lsof -p 18235|grep 8u
+python  18235 root    8u  IPv4 23796661      0t0      TCP 58.215.170.116:36217->58.215.170.85:https (ESTABLISHED)
+python  18235 root   88u  IPv4 23795354      0t0      TCP self:49292->10.176.22.42:https (ESTABLISHED)
+[root@lvs1_s ~]# tcpdump -i eth1 -n 'ip host 58.215.170.85 and port 443'
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), capture size 65535 bytes
+^C
+0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
