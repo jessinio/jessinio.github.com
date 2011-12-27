@@ -1,14 +1,201 @@
-[root@lvs1_s ~]# strace -p 18235
+---
+layout: post
+title: network hangup
+categories: linux
+---
+
+前几天因工作需要，使用python的httplib库写了一个简单的测试服务脚本。但是出现个好玩的问题。
+这里描述一下：
+#1. client端 即运行我写的脚本的服务器
+#1. server端 即被我写的脚本访问的服务器
+
+如果server突然crash后, client端的脚本会出现一直hangup的情况(不是100%出现)
+
+下面就是在现场找到的信息:
+
+{% highlight shell %}
+[root@lvs1_s ~]# strace -p 18235 (脚本的PID号)
 Process 18235 attached - interrupt to quit
 read(8, ^C <unfinished ...>
 Process 18235 detached
+{% endhighlight %}
+
+一直hangup在read系统调用中, file descriptor 8是什么? 查看一下:
+
+{% highlight shell %}
 [root@lvs1_s ~]# lsof -p 18235|grep 8u
-python  18235 root    8u  IPv4 23796661      0t0      TCP 58.215.170.116:36217->58.215.170.85:https (ESTABLISHED)
+python  18235 root    8u  IPv4 23796661      0t0      TCP 58.xxx.xx.116:36217->58.xxx.xx.85:https (ESTABLISHED)
 python  18235 root   88u  IPv4 23795354      0t0      TCP self:49292->10.176.22.42:https (ESTABLISHED)
-[root@lvs1_s ~]# tcpdump -i eth1 -n 'ip host 58.215.170.85 and port 443'
+{% endhighlight %}
+
+可以看出， 是socket。抓包也不见有任何数据:
+
+{% highlight shell %}
+[root@lvs1_s ~]# tcpdump -i eth1 -n 'ip host 58.xxx.xx.85 and port 443'
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on eth1, link-type EN10MB (Ethernet), capture size 65535 bytes
 ^C
 0 packets captured
 0 packets received by filter
 0 packets dropped by kernel
+{% endhighlight %}
+
+
+解决这个问题,可以有几种方法,比如:
+#1. 使用thread
+#1. 使用child process
+#1. 不使用httplib, 直接使用socket,这样可以使用更多的IO特性
+
+选1的话,把thread给hangup了也是个问题.
+选2的话,看上去不够优雅
+选3的话,又懒得去分析HTTP协议, 特别是https!.
+
+经过测试,发现只有https才会有这种问题. 测试方法如下:
+
+client端:
+{% highlight shell %}
+import os
+import traceback
+import sys
+import threading
+import httplib
+import ssl
+
+connection = httplib.HTTPSConnection(host="10.241.31.44", port=8082, timeout=7)
+connection.request("GET", "/", headers={})
+response = connection.getresponse()
+print response.status, response.read()
+
+{% endhighlight %}
+
+server端:
+{% highlight shell %}
+
+import os
+import sys
+import traceback
+import socket
+import select
+import time
+
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('0.0.0.0', 8082))
+sock.listen(10)
+
+while True:
+    try:
+        s = sock.accept()[0]
+        fd = s.fileno()
+        fd_list = [fd]
+
+        write_list = select.select([], fd_list, [])[1]
+        d = 0
+        for fd in write_list:
+            time.sleep(50) # 为了方便重现问题这里sleep, 在这50秒里把网线拨了就出现hangup
+            os.close(fd)
+            fd_list.remove(fd)
+    except:
+        traceback.print_exc()
+        print 'error!'
+
+    time.sleep(5)
+
+{% endhighlight %}
+
+为了找个这个问题的原因, 查看httplib库的HTTPSConnection类,发现它的作用和下面的代码一致(当然也引发了这个hangup的问题)
+{% highlight shell %}
+
+import socket
+import ssl
+
+timeout = 10
+socket.setdefaulttimeout(timeout)
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+sock.connect(("10.241.31.44", 8082))
+ssl_sock= ssl.wrap_socket(sock, None, None)
+
+{% endhighlight %}
+
+很显示,问题出在ssl库的上. 再跟进ssl库,可以看到如下的代码:
+{% highlight shell %}
+            # yes, create the SSL object
+            self._sslobj = _ssl.sslwrap(self._sock, server_side,
+                                        keyfile, certfile,
+                                        cert_reqs, ssl_version, ca_certs)
+            if do_handshake_on_connect:
+                timeout = self.gettimeout()
+                try:
+                    self.settimeout(None)
+                    self.do_handshake()
+                finally:
+                    self.settimeout(timeout)
+{% endhighlight %}
+
+我靠! 因为do_handshake_on_connect参数, 让HTTPSConnection类实例化时timeout参数在do_handshake()之前被清了. fuck~~~~~~
+
+看到只能把HTTPSConnection类的connect方法override一下了.
+
+HTTPSConnection原代码是这样的:
+{% highlight shell %}
+    class HTTPSConnection(HTTPConnection):
+        "This class allows communication via SSL."
+
+        default_port = HTTPS_PORT
+
+        def __init__(self, host, port=None, key_file=None, cert_file=None,
+                     strict=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
+            HTTPConnection.__init__(self, host, port, strict, timeout)
+            self.key_file = key_file
+            self.cert_file = cert_file
+
+        def connect(self):
+            "Connect to a host on a given (SSL) port."
+
+            sock = socket.create_connection((self.host, self.port), self.timeout)
+            if self._tunnel_host:
+                self.sock = sock
+                self._tunnel()
+            self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file)
+{% endhighlight %}
+
+把connect方法override:
+{% highlight shell %}
+
+import socket
+import os
+import traceback
+import sys
+import threading
+import httplib
+import ssl
+from _ssl import CERT_NONE, PROTOCOL_SSLv23
+
+class MyHTTPSConnection(httplib.HTTPSConnection):
+
+    def connect(self):
+        "Connect to a host on a given (SSL) port."
+
+        sock = socket.create_connection((self.host, self.port), self.timeout)
+        if self._tunnel_host:
+            self.sock = sock
+            self._tunnel()
+        #self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file)
+        self.sock = ssl.wrap_socket(sock, keyfile=None, certfile=None,
+                        server_side=False, cert_reqs=CERT_NONE,
+                        ssl_version=PROTOCOL_SSLv23, ca_certs=None,
+                        do_handshake_on_connect=False,
+                        suppress_ragged_eofs=True)
+        # 在允许超时的情况下调用do_handshake()
+        self.sock.do_handshake()
+
+connection = MyHTTPSConnection(host="10.241.31.44", port=8082, timeout=7)
+connection.request("GET", "/", headers={})
+response = connection.getresponse()
+print response.status, response.read()
+
+{% endhighlight %}
+
+哈, override后的MyHTTPSConnection一切正常
