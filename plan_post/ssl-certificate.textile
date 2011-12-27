@@ -5,8 +5,7 @@ categories: linux
 ---
 
 
-
-几个名词：
+有一堆名词需要弄清楚：
 #. CA
 #. CA file
 #. certificate
@@ -14,7 +13,13 @@ categories: linux
 #. CRL
 #. self-signed certificate
 
-CA一指certificate authority
-CA一指已经签名的certificate, 比如open verify -CAfile 命令中的CAfile
+太混乱了~~~
 
+CA有几个意思：
+#. certificate authority
+#. 已经签名的public key, 也称证书(certificate), 比如open verify -CAfile 命令中的CAfile. CAfile它可能是Root certificate, 也可以是非ROOT certificate.
+
+Root certificate有两种情况：
+#. 自签名
+#. 未签名
 
