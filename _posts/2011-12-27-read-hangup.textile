@@ -108,7 +108,7 @@ server端:
 
 {% endhighlight %}
 
-为了找个这个问题的原因, 查看httplib库的HTTPSConnection类,发现它的作用和下面的代码一致(当然也引发了这个hangup的问题)
+为了找个这个问题的原因, 查看httplib库的HTTPSConnection类,发现它的作用和下面的代码一致(当然也引发了这个hangup的问题):
 
 {% highlight text %}
 
