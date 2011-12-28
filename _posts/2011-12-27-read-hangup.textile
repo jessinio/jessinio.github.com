@@ -55,7 +55,7 @@ listening on eth1, link-type EN10MB (Ethernet), capture size 65535 bytes
 经过测试,发现只有https才会有这种问题. 测试方法如下:
 
 client端:
-{% highlight python %}
+{% highlight text %}
 import os
 import traceback
 import sys
@@ -71,7 +71,7 @@ print response.status, response.read()
 {% endhighlight %}
 
 server端:
-{% highlight python %}
+{% highlight text %}
 
 import os
 import sys
@@ -106,7 +106,7 @@ while True:
 {% endhighlight %}
 
 为了找个这个问题的原因, 查看httplib库的HTTPSConnection类,发现它的作用和下面的代码一致(当然也引发了这个hangup的问题)
-{% highlight python %}
+{% highlight text %}
 
 import socket
 import ssl
@@ -122,7 +122,7 @@ ssl_sock= ssl.wrap_socket(sock, None, None)
 {% endhighlight %}
 
 很显示,问题出在ssl库的上. 再跟进ssl库,可以看到如下的代码:
-{% highlight python %}
+{% highlight text %}
             # yes, create the SSL object
             self._sslobj = _ssl.sslwrap(self._sock, server_side,
                                         keyfile, certfile,
@@ -141,7 +141,7 @@ ssl_sock= ssl.wrap_socket(sock, None, None)
 看到只能把HTTPSConnection类的connect方法override一下了.
 
 HTTPSConnection原代码是这样的:
-{% highlight python %}
+{% highlight text %}
     class HTTPSConnection(HTTPConnection):
         "This class allows communication via SSL."
 
@@ -164,7 +164,7 @@ HTTPSConnection原代码是这样的:
 {% endhighlight %}
 
 把connect方法override:
-{% highlight python %}
+{% highlight text %}
 
 import socket
 import os
